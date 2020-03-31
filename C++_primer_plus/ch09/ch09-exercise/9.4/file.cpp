@@ -9,7 +9,7 @@ namespace SALES
         // copy sales
         for(int i = 0; i < QUARTERS; ++i)
         {
-            if(i <= n)
+            if(i < n)
                 s.sales[i] = ar[i];
             else
                 s.sales[i] = 0.0;
