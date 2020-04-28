@@ -54,9 +54,3 @@ void Tv::settings() const
             << (input == TV? "TV" : "DVD") << endl;
     }
 }
-
-void Tv::set_gmode(Remote & r) const
-{
-    if (state == On)
-        r.set_gmode();
-}

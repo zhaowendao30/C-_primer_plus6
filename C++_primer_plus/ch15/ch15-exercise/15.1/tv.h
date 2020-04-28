@@ -2,10 +2,6 @@
 #ifndef TV_H_
 #define TV_H_
 
-#include <iostream>
-
-class Remote;
-
 class Tv
 {
 public:
@@ -26,8 +22,6 @@ public:
     void set_mode() {mode = (mode == Antenna)? Cable : Antenna;}
     void set_input() {input = (input == TV)? DVD : TV;}
     void settings() const; // display all settings
-    void set_gmode(Remote &r) const;
-
 private:
     int state;             // on or off
     int volume;            // assumed to be digitized
@@ -39,19 +33,9 @@ private:
 
 class Remote
 {
-public:
-    friend class Tv;
-    enum
-    {
-        Normal,
-        Interactive
-    };
-
 private:
-    int mode;    // controls TV or DVD
-    int gmode;   // control Normal or Interactive
+    int mode;              // controls TV or DVD
 public:
-    
     Remote(int m = Tv::TV) : mode(m) {}
     bool volup(Tv & t) { return t.volup();}
     bool voldown(Tv & t) { return t.voldown();}
@@ -61,19 +45,5 @@ public:
     void set_chan(Tv & t, int c) {t.channel = c;}
     void set_mode(Tv & t) {t.set_mode();}
     void set_input(Tv & t) {t.set_input();}
-    void show_gmode() const;
-    void set_gmode();
 };
-
-inline void Remote::show_gmode() const
-{
-    std::cout << (gmode == Normal ? "Normal" : "Interactive") << std::endl;
-}
-
-inline void Remote::set_gmode()
-{
-    gmode = (gmode == Normal) ? Interactive : Normal;
-}
-
-
 #endif
